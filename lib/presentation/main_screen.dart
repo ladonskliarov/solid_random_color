@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:random_color/domain/color_generator.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -8,6 +9,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  ColorGenerator colorGenerator = ColorGenerator();
   Color _firstColor = Colors.blue;
   Color _secondColor = Colors.yellow;
 
@@ -16,12 +18,13 @@ class _MainScreenState extends State<MainScreen> {
     return GestureDetector(
       onTap: () {
         setState(() {
-          _firstColor = Colors.white;
-          _secondColor = Colors.black;
+          _firstColor = colorGenerator.getColor();
+          print(_firstColor);
+          _secondColor = colorGenerator.getColor();
         });
       },
       child: DefaultTextStyle(
-        style: const TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.w500),
+        style: TextStyle(color: Colors.white, fontSize: 25 + MediaQuery.of(context).size.width * 0.03, fontWeight: FontWeight.w500),
         child: SizedBox(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
